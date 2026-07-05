@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajneeshpuram: A Forensic Psychology Case Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EDE3D3;
+    --sand-deep:#E1D4BC;
+    --card:#FBF7EE;
+    --maroon:#6B1E23;
+    --maroon-deep:#4E1519;
+    --terracotta:#C6541D;
+    --teal:#2F6E6E;
+    --gold:#B8863B;
+    --ink:#201A16;
+    --ink-soft:#4a4038;
+    --rule: rgba(32,26,22,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(198,84,29,0.06), transparent 40%),
+      radial-gradient(circle at 90% 60%, rgba(47,110,110,0.05), transparent 45%);
+    overflow-x:hidden;
+  }
+  .sheet{max-width:1040px;margin:0 auto;padding:0 0 80px; position:relative;}
+ 
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    font-weight:600;
+  }
+
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; color:var(--ink);}
+  a{color:var(--maroon);}
+  section{scroll-margin-top:30px;}
+
+  /* ---------- PROGRESS BAR ---------- */
+  #progress-bar{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:linear-gradient(90deg,var(--terracotta),var(--gold));
+    z-index:200; transition:width 0.08s linear;
+  }
+
+
+  /* ---------- SIDE NAV DOTS ---------- */
+  #side-nav{
+    position:fixed; right:22px; top:50%; transform:translateY(-50%);
+    z-index:190; display:flex; flex-direction:column; gap:14px;
+    align-items:flex-end;
+  }
+
+  #side-nav a{
+    display:flex; align-items:center; gap:8px; text-decoration:none;
+    cursor:pointer;
+  }
+
+  #side-nav .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:rgba(107,30,35,0.28);
+    transition:all 0.3s ease;
+    transition:
+    transform .3s,
+    box-shadow .3s;
+  }
+
+  #side-nav .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.05em;
+    color:var(--maroon); opacity:0; transform:translateX(6px);
+    transition:all 0.25s ease; white-space:nowrap; background:var(--card);
+    padding:2px 7px; border:1px solid var(--rule);
+  }
+
+@keyframes navPulse{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.35);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+#side-nav a.active .dot{
+    box-shadow:0 0 10px rgba(198,84,29,.5);
+    animation:navPulse 2s ease-in-out infinite;
+}
+
+  #side-nav a:hover .tag{opacity:1; transform:translateX(0);}
+  #side-nav a.active .dot{background:var(--terracotta); width:11px; height:11px;}
+  @media (max-width:900px){ #side-nav{display:none;} }
+
+  /* ---------- REVEAL ANIMATION ---------- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.85s cubic-bezier(.2,.7,.3,1), transform 0.85s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal-stagger.in > *{opacity:1; transform:translateY(0);}
+
+  /* ---------- FOLDER TAB HEADER ---------- */
+  .case-header{
+    position:relative;
+    background:var(--maroon);
+    color:var(--sand);
+    padding:56px 56px 60px;
+    overflow:hidden;
+  }
+  .case-header::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 26px);
+    pointer-events:none;
+  }
+  .header-inner{position:relative; z-index:2; padding-bottom:40px;}
+  .tab{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold);
+    color:var(--maroon-deep);
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:12.5px;
+    letter-spacing:0.08em;
+    padding:6px 14px;
+    border-radius:2px 2px 0 0;
+    margin-bottom:22px;
+    animation:tabIn 0.6s ease both;
+  }
+  @keyframes tabIn{from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:translateY(0);}}
+  .tab .dot{width:7px;height:7px;border-radius:50%;background:var(--maroon-deep);display:inline-block; animation:blink 2.4s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+  .case-header .eyebrow{color:var(--sand); opacity:0.85;}
+  .case-header h1{
+    font-size:52px;
+    font-weight:700;
+    line-height:1.04;
+    color:#fff;
+    margin-top:10px;
+    max-width:760px;
+    letter-spacing:-0.01em;
+  }
+  .case-header h1 em{font-style:italic; font-weight:500; color:var(--terracotta);}
+  .case-header .sub{
+    margin-top:18px;
+    font-size:16.5px;
+    color:var(--sand);
+    opacity:0.92;
+    max-width:600px;
+  }
+.meta-strip{
+
+    margin-top:36px;
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:18px;
+
+    border-top:1px solid rgba(255,255,255,.18);
+
+    padding-top:22px;
+
+}
+.meta-strip div{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:14px;
+
+    transition:.3s;
+
+}
+.meta-strip div:hover{
+
+    transform:translateY(-4px);
+
+    background:rgba(255,255,255,.09);
+
+}
+  .meta-strip b{color:#fff; display:block; font-size:12px; margin-bottom:2px; letter-spacing:0.05em;}
+
+  /* ---------- HERO DESERT ILLUSTRATION ---------- */
+  .hero-illustration{position:relative; height:170px; margin-top:10px; z-index:1;}
+  .hero-illustration svg{position:absolute; bottom:0; left:0; width:100%; height:100%;}
+  .parallax-layer{will-change:transform;}
+
+  /* ---------- STAT STRIP ---------- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    background:var(--ink);
+  }
+.stat{
+    position:relative;
+    border:1px solid var(--rule);
+    border-radius:10px;
+    padding:22px 18px;
+    text-align:center;
+    overflow:hidden;
+    transition:
+        transform .35s,
+        box-shadow .35s,
+        border-top-color .35s;
+}
+.num-static{
+
+    font-family:'Fraunces', serif;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:var(--terracotta);
+
+    margin-bottom:10px;
+
+}
+.stat{
+    padding:30px 18px;
+    text-align:center;
+    border-right:1px solid rgba(255,255,255,.08);
+    color:var(--sand);
+    transition:
+        transform .3s,
+        background .3s;
+}
+
+.stat:hover{
+    transform:translateY(-8px);
+    box-shadow:0 16px 32px rgba(0,0,0,.12);
+    border-top-color:var(--terracotta);
+}
+
+  .stat:last-child{border-right:none;}
+
+.num{
+
+    font-family:'Fraunces', serif;
+    font-size:44px;
+    font-weight:700;
+    color:var(--terracotta);
+    line-height:1;
+    margin-bottom:10px;
+}
+
+
+
+ .lbl{
+
+    font-family:'IBM Plex Mono', monospace;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+    font-size:11px;
+
+    line-height:1.6;
+
+}
+
+  /* ---------- SECTIONS ---------- */
+  section.content{padding:54px 56px 10px;}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:26px;}
+  .section-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px; color:var(--terracotta); font-weight:600;
+  }
+  .section-head h2{font-size:30px; font-weight:600;}
+  .section-rule{height:2px; background:var(--maroon); margin-top:6px; transform-origin:left; transform:scaleX(0); transition:transform 0.9s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in .section-rule{transform:scaleX(1);}
+  .lede{max-width:760px; color:var(--ink-soft); font-size:15.5px; margin-bottom:8px;}
+
+  /* ---------- BACKGROUND ---------- */
+  .bg-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:start;}
+  .bg-text p{margin:0 0 14px; color:var(--ink-soft); font-size:15px;}
+  .bg-text strong{color:var(--ink);}
+  .factbox{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--teal);
+    padding:20px 22px;
+    font-size:14px;
+  }
+  .factbox h3{font-size:14px; font-family:'IBM Plex Mono',monospace; letter-spacing:0.04em; color:var(--teal); margin-bottom:10px; text-transform:uppercase;}
+  .factbox ul{margin:0; padding-left:18px; color:var(--ink-soft);}
+  .factbox li{margin-bottom:7px;}
+
+  /* ---------- MAP ILLUSTRATION ---------- */
+  .map-card{background:var(--card); border:1px solid var(--rule); padding:18px; margin-top:18px; cursor:zoom-in;}
+  .map-card svg{width:100%; height:auto; display:block;}
+#real-map{
+    width:100%;
+    display:block;
+    border-radius:6px;
+    border:2px solid var(--gold);
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.12);
+}
+  .map-caption{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-soft); margin-top:8px; letter-spacing:0.02em;}
+  .map-path{stroke-dasharray:400; stroke-dashoffset:400; transition:stroke-dashoffset 1.6s ease;}
+  .reveal.in .map-path{stroke-dashoffset:0;}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; padding-left:26px; margin-top:10px;}
+  .timeline-spine{position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--rule); transform-origin:top; transform:scaleY(0); transition:transform 1.4s cubic-bezier(.2,.7,.3,1);}
+  .timeline.in .timeline-spine{transform:scaleY(1);}
+  .tl-item{position:relative; padding-bottom:30px; opacity:0; transform:translateX(-14px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .tl-item.in{opacity:1; transform:translateX(0);}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-26px; top:4px; width:14px; height:14px; border-radius:50%;
+    background:var(--sand); border:3px solid var(--maroon);
+  }
+  .tl-item.flag::before{background:var(--terracotta); border-color:var(--terracotta);box-shadow: 0 0 12px rgba(198,84,29,.45);}
+  .tl-date{
+
+    display:inline-block;
+
+    padding:4px 10px;
+
+    background:var(--maroon);
+
+    color:white;
+
+    border-radius:4px;
+
+    font-family:'IBM Plex Mono', monospace;
+
+    font-size:11px;
+
+    letter-spacing:.06em;
+
+    margin-bottom:8px;
+
+}
+  .tl-title{font-family:'Fraunces',serif; font-weight:600; font-size:20px; margin:3px 0 4px;}
+  .tl-body{
+
+    font-size:15px;
+
+    line-height:1.75;
+
+    color:var(--ink-soft);
+
+    max-width:700px;
+
+}
+.profile-switch{
+    display:flex;
+    gap:12px;
+    margin:20px 0 35px;
+}
+.profile-switch button{
+    padding:10px 18px;
+    background:#6B1E23 !important;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+
+transition:
+background .3s,
+transform .2s,
+box-shadow .2s;
+}
+
+.profile-switch button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+0 6px 14px rgba(0,0,0,.18);
+ background:#C6541D !important;
+
+
+}
+.profile-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+#current-profile{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#6B1E23;
+}
+
+#current-profile strong{
+    display:block;
+    margin-top:4px;
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    text-transform:none;
+    letter-spacing:0;
+    color:#201A16;
+}
+  /* ---------- PROFILE CARD ---------- */
+  .profile-wrap{display:grid; grid-template-columns:230px 1fr; gap:34px; align-items:start;}
+  .profile-card{
+    background:var(--maroon);
+    color:var(--sand);
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+    border-top:4px solid var(--gold);
+
+  }
+  .profile-card .exhibit-tag{position:absolute; top:14px; right:14px; z-index:2;}
+.silhouette-box{
+    width:100%;
+    height:240px;
+    background:var(--maroon-deep);
+    border:1px solid rgba(255,255,255,.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+  .silhouette-box svg{width:100%; height:100%; display:block;}
+#profile-photo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+}
+.silhouette-caption{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    right:0;
+
+    padding:10px;
+
+    background:linear-gradient(
+        rgba(0,0,0,0),
+        rgba(0,0,0,.75)
+    );
+
+    color:#EDE3D3;
+
+    font-family:'IBM Plex Mono', monospace;
+
+    font-size:10px;
+
+    letter-spacing:.06em;
+
+    line-height:1.5;
+
+}
+  .profile-card h3{
+    color:#fff;
+    font-size:20px;
+    margin-top:14px;
+}
+  .profile-card .role{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--gold); margin-top:4px; letter-spacing:0.04em;}
+  .trait-list{margin-top:18px; display:flex; flex-wrap:wrap; gap:6px;}
+  .trait{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.03em;
+    border:1px solid rgba(255,255,255,0.35); padding:4px 9px; color:var(--sand);
+    opacity:0; transform:scale(0.9); transition:all 0.4s ease;
+  }
+  .profile-card.in .trait{opacity:1; transform:scale(1);}
+  .profile-notes p{color:var(--ink-soft); font-size:15px; margin:0 0 14px;}
+  .profile-notes strong{color:var(--ink);}
+
+  /* ---------- PROVOCATION VS PREMEDITATION ---------- */
+  .versus{display:grid; grid-template-columns:1fr auto 1fr; gap:0; margin-top:6px;}
+  .v-col{padding:22px 26px; cursor:pointer; transition:opacity 0.35s ease, transform 0.35s ease;}
+  .v-col.no{background:rgba(107,30,35,0.05); border:1px solid rgba(107,30,35,0.18);}
+  .v-col.yes{background:rgba(47,110,110,0.06); border:1px solid rgba(47,110,110,0.25);}
+  .versus.dim-no .v-col.no{opacity:0.35; transform:scale(0.98);}
+  .versus.dim-yes .v-col.yes{opacity:0.35; transform:scale(0.98);}
+  .v-mid{display:flex; align-items:center; justify-content:center; padding:0 18px; font-family:'Fraunces',serif; font-style:italic; color:var(--ink-soft); font-size:14px;}
+  .v-col h3{font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .v-count{font-size:22px; font-family:'Fraunces',serif; font-weight:700;}
+  .v-col.no h3{color:var(--maroon);}
+  .v-col.yes h3{color:var(--teal);}
+  .v-col ul{margin:14px 0 0; padding-left:18px; font-size:14px; color:var(--ink-soft);}
+  .v-col li{margin-bottom:9px; opacity:0; transform:translateX(-8px); transition:opacity 0.45s ease, transform 0.45s ease;}
+  .v-col.in li{opacity:1; transform:translateX(0);}
+  .verdict{
+    margin-top:22px; padding:16px 20px; background:var(--card); border:1px dashed var(--gold);
+    font-size:14.5px; color:var(--ink-soft);
+  }
+  .verdict b{color:var(--ink);}
+
+  /* ---------- EXHIBIT CARD GRID ---------- */
+  .exhibit-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:8px;}
+  .exhibit{
+    background:var(--card);
+    border:1px solid var(--rule);
+    padding:20px;
+    position:relative;
+    transition:
+    transform .35s,
+    box-shadow .35s,
+    border-color .35s;
+	}
+  .exhibit:hover{transform:translateY(-5px); box-shadow:0 14px 26px rgba(32,26,22,0.13);border:2px solid var(--gold);}
+  .exhibit-tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600;
+    letter-spacing:0.05em;
+    background:var(--gold); color:var(--maroon-deep);
+    padding:3px 8px;
+  }
+  .exhibit-icon{width:34px; height:34px; margin-top:14px;}
+  .exhibit h3{font-size:16.5px; margin:12px 0 8px; line-height:1.25;}
+  .exhibit p{font-size:13.5px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- INVESTIGATIVE TECHNIQUES ---------- */
+  .invest-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:8px;}
+  .invest{padding:18px; border-top:3px solid var(--teal); background:var(--card); transition:transform 0.3s ease, box-shadow 0.3s ease;}
+  .invest:hover{transform:translateY(-5px); box-shadow:0 14px 26px rgba(32,26,22,0.1);}
+  .invest .icon{width:30px; height:30px; margin-bottom:8px;}
+  .invest .n{font-family:'IBM Plex Mono',monospace; color:var(--teal); font-size:12px; font-weight:600;}
+  .invest h3{font-size:15px; margin:8px 0 6px;}
+  .invest p{font-size:13px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- LITERATURE REVIEW ---------- */
+.lit-card{
+
+    position:relative;
+
+    background:var(--card);
+
+    border:1px solid var(--rule);
+
+    border-left:5px solid var(--maroon);
+
+    padding:26px 28px;
+
+    margin-bottom:24px;
+
+    transition:
+        transform .3s,
+        box-shadow .3s,
+        border-left-color .3s;
+
+}
+
+.journal-label{
+
+    display:inline-block;
+
+    margin-bottom:14px;
+
+    padding:5px 10px;
+
+    background:var(--maroon);
+
+    color:white;
+
+    font-size:10px;
+
+    letter-spacing:.12em;
+
+    font-family:'IBM Plex Mono', monospace;
+
+    border-radius:4px;
+
+}
+
+.lit-card:hover{
+
+    transform:translateY(-6px);
+
+    border-left-color:var(--terracotta);
+
+    box-shadow:0 16px 32px rgba(0,0,0,.10);
+
+}
+  .lit-card:hover{transform:translateX(4px); border-left-color:var(--terracotta);}
+.lit-card .cite{
+
+    font-family:'IBM Plex Mono', monospace;
+
+    font-size:11px;
+
+    color:var(--maroon);
+
+    letter-spacing:.05em;
+
+    line-height:1.8;
+
+    text-transform:uppercase;
+
+    margin-bottom:12px;
+
+}
+  .lit-card h3{
+
+    font-size:22px;
+
+    line-height:1.35;
+
+    margin-bottom:14px;
+
+}
+.lit-card p{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    color:var(--ink-soft);
+
+    margin-bottom:14px;
+
+}
+  .lit-card .tag-row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+.lit-tag{
+
+    background:rgba(184,134,59,.12);
+
+    color:var(--maroon);
+
+    border:1px solid rgba(184,134,59,.25);
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    letter-spacing:.08em;
+
+    font-family:'IBM Plex Mono', monospace;
+
+}
+  /* ---------- INTEGRATION ---------- */
+  .integration{
+    background:var(--maroon); color:var(--sand); padding:36px 40px; margin-top:10px;
+    position:relative; overflow:hidden;
+  }
+  .integration h2{color:#fff; font-size:24px; margin-bottom:14px;}
+  .integration p{font-size:15px; line-height:1.65; opacity:0.94; margin:0 0 14px;}
+  .integration p:last-child{margin-bottom:0;}
+
+  /* ---------- REFERENCES ---------- */
+.refs{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:30px 0;
+
+}
+.refs li{
+
+    position:relative;
+
+    margin-bottom:24px;
+
+    padding-left:38px;
+
+    text-indent:-22px;
+
+    line-height:1.85;
+
+    color:var(--ink-soft);
+
+    font-size:14px;
+
+}
+.refs li:not(:last-child){
+
+    border-bottom:1px dashed rgba(0,0,0,.08);
+
+    padding-bottom:18px;
+
+}
+  .refs li::before{content:""; position:absolute; left:0; color:var(--gold);}
+.case-stamp{
+
+    margin-top:80px;
+
+    text-align:center;
+
+    font-family:'IBM Plex Mono', monospace;
+
+    font-size:82px;
+
+    font-weight:700;
+
+    letter-spacing:.22em;
+
+    color:var(--maroon);
+
+    opacity:.06;
+
+    transform:rotate(-14deg);
+
+    user-select:none;
+
+    pointer-events:none;
+
+}
+  footer{
+    padding:30px 56px 40px; font-family:'IBM Plex Mono',monospace; font-size:11.5px;
+    color:var(--ink-soft); border-top:1px solid var(--rule); margin-top:20px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- LIGHTBOX ---------- */
+  #lightbox{
+    position:fixed; inset:0; background:rgba(32,26,22,0.86); z-index:300;
+    display:none; align-items:center; justify-content:center; padding:40px; cursor:zoom-out;
+  }
+  #lightbox.open{display:flex; animation:fadeIn 0.25s ease;}
+  @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
+  #lightbox .lb-inner{background:var(--card); padding:24px; max-width:800px; width:100%;}
+  #lightbox svg{width:100%; height:auto;}
+
+  @media (max-width:800px){
+    .case-header, section.content, footer{padding-left:24px; padding-right:24px;}
+    .case-header h1{font-size:34px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .stat{border-right:none; border-bottom:1px solid rgba(255,255,255,0.08);}
+    .bg-grid, .profile-wrap, .versus, .exhibit-grid, .invest-grid{grid-template-columns:1fr;}
+    .v-mid{padding:14px 0;}
+  }
+.subject-details{
+
+    margin:18px 0;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+    padding:12px 0;
+
+}
+
+.subject-details div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:8px 0;
+
+}
+
+.subject-details span{
+
+    color:#c9b59d;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    font-family:'IBM Plex Mono', monospace;
+
+}
+
+.subject-details strong{
+
+    color:white;
+
+    font-size:13px;
+
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<nav id="side-nav">
+  <a href="#s01" data-target="s01"><span class="tag">Background</span><span class="dot"></span></a>
+  <a href="#s02" data-target="s02"><span class="tag">Timeline</span><span class="dot"></span></a>
+  <a href="#s03" data-target="s03"><span class="tag">Profile</span><span class="dot"></span></a>
+  <a href="#s04" data-target="s04"><span class="tag">Provocation v. Premeditation</span><span class="dot"></span></a>
+  <a href="#s05" data-target="s05"><span class="tag">Deception</span><span class="dot"></span></a>
+  <a href="#s06" data-target="s06"><span class="tag">Investigation</span><span class="dot"></span></a>
+  <a href="#s07" data-target="s07"><span class="tag">Literature</span><span class="dot"></span></a>
+  <a href="#s08" data-target="s08"><span class="tag">Integration</span><span class="dot"></span></a>
+</nav>
+
+<div id="lightbox"><div class="lb-inner" id="lightbox-content"></div></div>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <header class="case-header">
+    <div class="header-inner">
+      <div class="tab"><span class="dot"></span>CASE FILE — United States v. Ma Anand Sheela et al.</div>
+      <div class="eyebrow">A Forensic Psychology Case Portfolio</div>
+      <h1>The Salad Bar Conspiracy: <em>Rajneeshpuram</em> and the First Bioterror Attack on U.S. Soil</h1>
+      <p class="sub">A behavioural analysis of the 1984 Rajneeshee bioterror attack in The Dalles, Oregon — examining psychological profiling, premeditation, deception, and the investigative science that closed the case.</p>
+<div class="meta-strip">
+    <div>
+        <b>CASE STATUS</b>
+        CLOSED
+    </div>
+    <div>
+        <b>PRIMARY SUBJECT</b>
+        Ma Anand Sheela
+    </div>
+    <div>
+        <b>OFFENCE TYPE</b>
+        Bioterrorism
+    </div>
+    <div>
+        <b>LOCATION</b>
+        The Dalles, Oregon
+    </div>
+    <div>
+        <b>YEAR</b>
+        1984
+    </div>
+</div>
+    </div>
+    <div class="hero-illustration">
+      <svg viewBox="0 0 1200 170" preserveAspectRatio="none">
+        <rect x="0" y="0" width="1200" height="170" fill="none"/>
+        <path class="parallax-layer" data-speed="0.06" d="M0,140 L120,90 L260,150 L420,70 L560,150 L720,60 L900,140 L1050,95 L1200,150 L1200,170 L0,170 Z" fill="#4E1519" opacity="0.55"/>
+        <path class="parallax-layer" data-speed="0.12" d="M0,160 L150,120 L330,165 L520,110 L700,165 L880,105 L1040,160 L1200,130 L1200,170 L0,170 Z" fill="#5c191e" opacity="0.8"/>
+        <circle class="parallax-layer" data-speed="-0.08" cx="1080" cy="46" r="26" fill="#B8863B" opacity="0.85"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats reveal-stagger">
+    <div class="stat"><div class="stat-id">EX-01</div><div class="num" data-count="751">0</div><div class="lbl">People sickened</div></div>
+    <div class="stat"><div class="stat-id">EX-02</div><div class="num" data-count="45">0</div><div class="lbl">Hospitalised</div></div>
+    <div class="stat"><div class="stat-id">EX-03</div><div class="num" data-count="10">0</div><div class="lbl">Restaurants targeted</div></div>
+    <div class="stat"><div class="stat-id">EX-04</div><div class="num" data-count="0">0</div><div class="lbl">Deaths</div></div>
+    <div class="stat"><div class="stat-id">EX-05</div><div class="num-static">1st</div><div class="lbl">Bioterror attack, US history</div></div>
+  </div>
+
+  <!-- BACKGROUND -->
+  <section class="content" id="s01">
+    <div class="section-head reveal"><span class="section-num">01</span><h2>Background of the Case</h2></div>
+    <div class="section-rule reveal"></div>
+    <div class="bg-grid reveal" style="margin-top:26px;">
+      <div class="bg-text">
+        <p>In 1981, followers of Indian guru <strong>Bhagwan Shree Rajneesh</strong> (later known as Osho) established the intentional community of <strong>Rajneeshpuram</strong> on a 64,000-acre ranch in rural Wasco County, Oregon. Under the operational control of Rajneesh's personal secretary, <strong>Ma Anand Sheela</strong>, the commune grew to roughly 2,500 permanent residents and clashed repeatedly with local Oregonians over land use, zoning, and incorporation.</p>
+        <p>By 1984, commune leadership faced the prospect of losing political control of the county. To secure two contested seats on the Wasco County Circuit Court, the group first attempted to flood the electoral rolls with thousands of homeless recruits bused in through the "Share-A-Home" programme. When officials moved to block same-day voter registration, Sheela's inner circle turned to a different strategy: incapacitating the opposing electorate before they could vote.</p>
+        <p>That strategy became the <strong>1984 Rajneeshee bioterror attack</strong> — a deliberate, multi-stage plan to contaminate the food and water supply of The Dalles with cultured Salmonella bacteria.</p>
+
+<div class="map-card">
+
+    <img
+        src="images/map.png"
+        alt="Map showing Rajneeshpuram and The Dalles"
+        id="real-map">
+
+    <div class="map-caption">
+        Figure 1. Rajneeshpuram (Big Muddy Ranch) and The Dalles,
+        Wasco County, Oregon.
+    </div>
+
+</div>
+      </div>
+      <div class="factbox">
+        <h3>Case at a glance</h3>
+        <ul>
+          <li><strong>Principal architects:</strong> Ma Anand Sheela (Rajneesh's chief lieutenant) and Ma Anand Puja (nurse practitioner, Rajneesh Medical Corporation)</li>
+          <li><strong>Agent used:</strong> Salmonella enterica serotype Typhimurium, purchased legally from a Seattle medical supply company</li>
+          <li><strong>Motive:</strong> Suppress voter turnout to swing the 1984 Wasco County election</li>
+          <li><strong>Outcome:</strong> Rajneeshee candidates lost the election regardless; case unsolved for a year until Sheela's 1985 flight from the commune</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="content" id="s02">
+    <div class="section-head reveal"><span class="section-num">02</span><h2>The Plot: A Timeline of Premeditation</h2></div>
+    <div class="section-rule reveal"></div>
+    <p class="lede reveal">The sequence below matters for the provocation/premeditation analysis in Section 4 — note the deliberate progression from covert testing to full deployment.</p>
+    <div class="timeline">
+      <div class="timeline-spine"></div>
+      <div class="tl-item">
+        <div class="tl-date">1981</div>
+        <div class="tl-title">🏠 Rajneeshpuram Founded</div>
+        <div class="tl-body">Commune established at Big Muddy Ranch; tensions with Wasco County begin almost immediately over land use and incorporation.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jul – Oct 1984</div>
+        <div class="tl-title">"🚌 Share-A-Home Programme" programme</div>
+        <div class="tl-body">Roughly 3,000 homeless individuals bused to the ranch and registered to vote, in an attempt to win the county election through numbers rather than force.</div>
+      </div>
+      <div class="tl-item flag">
+        <div class="tl-date">29 Aug 1984</div>
+        <div class="tl-title">🧪 First Covert Test</div>
+        <div class="tl-body">Two visiting Wasco County commissioners are given water glasses laced with Salmonella. Both fall ill; one is hospitalised. A controlled, low-visibility trial of the method.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Sept 1984</div>
+        <div class="tl-title">⚠ Failed Dispersal Attempt</div>
+        <div class="tl-body">Members spread bacteria on grocery produce, doorknobs, and courthouse urinal handles. No measurable outbreak results — the method is refined rather than abandoned.</div>
+      </div>
+      <div class="tl-item flag">
+        <div class="tl-date">Sept – Oct 1984</div>
+        <div class="tl-title">☣ Salad Bar Attacks</div>
+        <div class="tl-body">Ten restaurants in The Dalles are deliberately contaminated using a brown Salmonella culture the perpetrators called "salsa." 751 people fall ill; 45 are hospitalised.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Nov 1984</div>
+        <div class="tl-title">🗳 Election Proceeds</div>
+        <div class="tl-body">Turnout suppression is insufficient — Rajneeshee-backed candidates lose. The attack's motive goes undetected for another year.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Sept 1985</div>
+        <div class="tl-title">✈ Sheela Flees the U.S.</div>
+        <div class="tl-body">Internal discord prompts Sheela and senior lieutenants to leave the country. Osho publicly accuses them of a range of crimes and invites investigators onto the commune.</div>
+      </div>
+      <div class="tl-item flag">
+        <div class="tl-date">Oct 1985</div>
+        <div class="tl-title">🚔 FBI Raid & Laboratory Discovery</div>
+        <div class="tl-body">Investigators uncover a clandestine laboratory containing Salmonella cultures, an invoice for Salmonella typhi, and evidence of a separate plot against U.S. Attorney Charles Turner.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">1986</div>
+        <div class="tl-title">⚖ Guilty Pleas</div>
+        <div class="tl-body">Sheela and Puja plead guilty to charges including attempted murder and product tampering; each serves 29 months before parole.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PSYCHOLOGICAL PROFILE -->
+  <section class="content" id="s03">
+   <div class="section-head reveal">
+    <span class="section-num">03</span>	
+    <h2>Psychological Profiles</h2>
+</div>
+
+<div class="profile-header">
+    <div id="current-profile">
+        SUBJECT PROFILE<br>
+        <strong>Ma Anand Sheela</strong>
+    </div>
+<div class="profile-switch">
+
+    <button id="show-sheela" class="active">
+        Ma Anand Sheela
+    </button>
+
+    <button id="show-puja">
+        Ma Anand Puja
+    </button>
+
+</div>
+</div>
+   
+
+    <div class="section-rule reveal"></div>
+    <div class="profile-wrap reveal" style="margin-top:26px;">
+      <div class="profile-card">
+        <span class="exhibit-tag">SUBJECT-01</span>
+<div class="silhouette-box" id="profile-image-box">
+
+<img
+    id="profile-photo"
+    src="images/sheela.jpeg"
+    alt="Ma Anand Sheela">
+<div id="profile-silhouette" style="display:none;">
+<svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="260" fill="#4E1519"/>
+    <path d="M100,55 C120,55 134,72 134,94 C134,114 122,128 108,132 C140,140 162,166 166,206 L34,206 C38,166 60,140 92,132 C78,128 66,114 66,94 C66,72 80,55 100,55 Z" fill="#201A16" opacity="0.9"/>
+    <path d="M64,96 C60,86 62,74 70,66 M136,96 C140,86 138,74 130,66" stroke="#B8863B" stroke-width="2" fill="none" opacity="0.5"/>
+    <circle cx="100" cy="196" r="5" fill="#B8863B"/>
+    <circle cx="100" cy="210" r="5" fill="#B8863B"/>
+    <circle cx="100" cy="224" r="5" fill="#B8863B"/>
+</svg>
+</div>
+
+</div>
+        <h3 id="profile-name">Ma Anand Sheela</h3>
+        <div class="role" id="profile-role">Personal secretary to Rajneesh · commune administrator</div>
+<div class="subject-details">
+
+    <div>
+        <span>Status:</span>
+        <strong id="profile-status">Convicted</strong>
+    </div>
+
+    <div>
+        <span>Role:</span>
+        <strong id="profile-position">Leader</strong>
+    </div>
+
+    <div>
+        <span>Risk:</span>
+        <strong id="profile-risk">High</strong>
+    </div>
+
+</div>
+        <div class="trait-list" id="trait-list">	
+          <span class="trait">Organised offender</span>
+          <span class="trait">High control need</span>
+          <span class="trait">Instrumental aggression</span>
+          <span class="trait">Manipulative influence style</span>
+          <span class="trait">Authoritarian leadership</span>
+        </div>
+      </div>
+
+      <div class="profile-notes" id="profile-notes">
+        <p><strong>Offence style:</strong> Sheela's role in the attack maps closely onto what profiling literature calls the <em>organised offender</em> — methodical planning, controlled testing before full deployment, and a clear instrumental goal (electoral advantage) rather than impulsive or expressive violence. This distinguishes the case from disorganised, emotionally-driven offending.</p>
+        <p><strong>Authority and manipulation:</strong> Multiple commune members testified that Sheela selectively edited recordings of Rajneesh and framed questions to him narrowly, so that his general answers could later be presented as authorisation for actions he had not specifically approved. Her own husband described this as a deliberate technique for manufacturing consent after the fact.</p>
+        <p><strong>Command structure:</strong> Sheela operated at the centre of a tightly compartmentalised cell — roughly a dozen people were involved across planning, laboratory production, and dispersal, with several participants reportedly unaware of the full objective of their work. This compartmentalisation is itself a psychologically and forensically significant feature: it limited what any single defector could disclose.</p>
+        <p><strong>Contested attribution:</strong> A 1994 study noted that most followers believed Rajneesh had not personally directed the poisoning, seeing it instead as Sheela's independent initiative — an important caution against assuming a charismatic leader's authority automatically extends to operational criminal control.</p>
+      <div id="case-note" class="factbox">
+    <h3>Case Note</h3>
+    <p>
+        Ma Anand Sheela has remained a public figure through interviews,
+        documentaries and public appearances.
+    </p>
+</div>
+	</div>
+    </div>
+  </section>
+
+  <!-- PROVOCATION VS PREMEDITATION -->
+  <section class="content" id="s04">
+    <div class="section-head reveal"><span class="section-num">04</span><h2>Provocation vs. Premeditation</h2></div>
+    <div class="section-rule reveal"></div>
+    <p class="lede reveal">A core forensic psychology distinction: was this a reactive act triggered by provocation, or a planned, goal-directed act of premeditated violence? <em>Click either column to weigh it.</em></p>
+    <div class="versus reveal" id="versus-block">
+      <div class="v-col no" onclick="toggleVersus('no')">
+        <h3>Against "provocation" <span class="v-count" data-count="3">0</span></h3>
+        <ul>
+          <li>No single triggering event immediately preceded the attack — grievances over land use had existed for years without escalating to poisoning</li>
+          <li>The response (mass biological attack) is wildly disproportionate to any specific provocation on record</li>
+          <li>No evidence of an affect-driven, in-the-moment decision by Sheela or Puja</li>
+        </ul>
+      </div>
+      <div class="v-mid">vs.</div>
+      <div class="v-col yes" onclick="toggleVersus('yes')">
+        <h3>Evidence for premeditation <span class="v-count" data-count="5">0</span></h3>
+        <ul>
+          <li>Bacteria were purchased through legitimate commercial channels and cultured over time in a dedicated facility</li>
+          <li>A documented "trial run" phase (produce, doorknobs, water glasses) preceded the full-scale attack</li>
+          <li>An invoice for Salmonella typhi shows planning for an even more dangerous agent</li>
+          <li>The attack was explicitly tied to a calculated electoral objective, not an emotional response</li>
+          <li>A separate, related conspiracy to assassinate a federal prosecutor shows an established pattern of instrumental violence</li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict reveal"><b>Assessment:</b> The evidentiary pattern — incremental testing, legitimate procurement, compartmentalised roles, and a stable strategic motive sustained over months — is textbook premeditation, not provocation. This matters practically: it is the difference between a mitigated and an aggravated charge in most criminal justice systems, and it shaped the eventual attempted-murder charges against Sheela and Puja.</div>
+  </section>
+
+  <!-- DECEPTION -->
+  <section class="content" id="s05">
+    <div class="section-head reveal"><span class="section-num">05</span><h2>Deception Techniques</h2></div>
+    <div class="section-rule reveal"></div>
+    <div class="exhibit-grid reveal-stagger">
+      <div class="exhibit">
+        <span class="exhibit-tag">EX-02</span>
+        <svg class="exhibit-icon" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#6B1E23" stroke-width="2"/><path d="M12,17 Q20,10 28,17 M14,24 Q20,29 26,24" stroke="#6B1E23" stroke-width="2" fill="none"/><circle cx="15" cy="18" r="1.6" fill="#6B1E23"/><circle cx="25" cy="18" r="1.6" fill="#6B1E23"/></svg>
+        <h3>Manufactured authorisation</h3>
+        <p>Sheela reportedly asked Rajneesh broad, vague questions and later presented his general answers as specific approval for the plot — a manipulation of ambiguous authority rather than an outright lie.</p>
+      </div>
+      <div class="exhibit">
+        <span class="exhibit-tag">EX-03</span>
+        <svg class="exhibit-icon" viewBox="0 0 40 40"><path d="M4,34 L12,34 L12,26 L20,26 L20,18 L28,18 L28,10 L36,10" stroke="#C6541D" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="10" r="3" fill="#C6541D"/></svg>
+        <h3>Incremental, low-visibility testing</h3>
+        <p>Before the salad bar attacks, the group ran deniable "trial runs" (contaminated water, produce, doorknobs) that could plausibly be dismissed as coincidence if noticed — classic behavioural piloting before a high-stakes act.</p>
+      </div>
+      <div class="exhibit">
+        <span class="exhibit-tag">EX-04</span>
+        <svg class="exhibit-icon" viewBox="0 0 40 40"><path d="M20,6 L20,26 M20,6 L12,14 M20,6 L28,14" stroke="#2F6E6E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="32" r="2" fill="#2F6E6E"/></svg>
+        <h3>Misdirection toward an innocent cause</h3>
+        <p>Public health officials initially attributed the outbreak to poor restaurant hygiene. The absence of any claim of responsibility, combined with a plausible alternative explanation, delayed criminal investigation for roughly a year.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTIGATIVE TECHNIQUES -->
+  <section class="content" id="s06">
+    <div class="section-head reveal"><span class="section-num">06</span><h2>Investigative Techniques</h2></div>
+    <div class="section-rule reveal"></div>
+    <div class="invest-grid reveal-stagger">
+      <div class="invest">
+        <svg class="icon" viewBox="0 0 30 30"><circle cx="9" cy="9" r="3" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><circle cx="21" cy="9" r="3" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><circle cx="15" cy="21" r="3" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><path d="M11.4,10.4 L18.6,10.4 M10.2,11.5 L14,18.6 M19.8,11.5 L16,18.6" stroke="#2F6E6E" stroke-width="1.5"/></svg>
+        <div class="n">01</div>
+        <h3>Epidemiological case linkage</h3>
+        <p>CDC and Oregon Health Division traced hundreds of illness reports back to a common set of restaurants, establishing the outbreak's shape before its cause was known.</p>
+      </div>
+      <div class="invest">
+        <svg class="icon" viewBox="0 0 30 30"><path d="M13,26 L20,26 M16.5,26 L16.5,20" stroke="#2F6E6E" stroke-width="1.8"/><rect x="11" y="15" width="11" height="5" rx="1" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><path d="M14,15 L11,6 L17,6 L19,15" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><circle cx="14.5" cy="6" r="1.4" fill="#2F6E6E"/></svg>
+        <div class="n">02</div>
+        <h3>Microbiological matching</h3>
+        <p>Investigators matched the antibiogram, biochemical markers, and plasmid profile of bacteria found in the commune laboratory to the strain recovered from patients — the piece of physical evidence that closed the case.</p>
+      </div>
+      <div class="invest">
+        <svg class="icon" viewBox="0 0 30 30"><path d="M5,10 C5,6 10,4 15,4 C20,4 25,6 25,10 C25,14 20,16 15,16 C13,16 11.5,15.7 10.2,15.2 L5,17 L6.5,13.2 C5.5,12.3 5,11.2 5,10 Z" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><circle cx="11" cy="10" r="1.2" fill="#2F6E6E"/><circle cx="15" cy="10" r="1.2" fill="#2F6E6E"/><circle cx="19" cy="10" r="1.2" fill="#2F6E6E"/></svg>
+        <div class="n">03</div>
+        <h3>Cooperating witness testimony</h3>
+        <p>Rajneeshpuram's mayor, David Berry Knapp, turned state's evidence and described Sheela's planning directly to the FBI, corroborating the physical evidence with insider testimony.</p>
+      </div>
+      <div class="invest">
+        <svg class="icon" viewBox="0 0 30 30"><rect x="7" y="4" width="16" height="22" rx="1" fill="none" stroke="#2F6E6E" stroke-width="1.8"/><path d="M10,10 L20,10 M10,14 L20,14 M10,18 L16,18" stroke="#2F6E6E" stroke-width="1.5"/></svg>
+        <div class="n">04</div>
+        <h3>Documentary evidence</h3>
+        <p>A dated supply invoice for Salmonella typhi and internal lab notes gave investigators a paper trail establishing intent and timeline, independent of witness memory.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LITERATURE REVIEW -->
+  <section class="content" id="s07">
+    <div class="section-head reveal"><span class="section-num">07</span><h2>Literature Review (2016 – 2026)</h2></div>
+    <div class="section-rule reveal"></div>
+    <p class="lede reveal">Two empirical/review sources on the evolving role of forensic psychology, plus one applied source specific to this case.</p>
+
+    <div class="lit-card reveal">
+<div class="journal-label">
+    PEER-REVIEWED ARTICLE
+</div>
+      <div class="cite">Eze SM, Alabi KJ, Ibrahim SO, Yusuf AO, Hamzat FO, Abdulrauf A, et al. (2025). Forensic Psychology and Criminal Profiling. <em>Journal of Forensic Science and Research</em>, 9(1), 92–96.</div>
+      <h3>Criminal profiling: a valuable adjunct, not a standalone tool</h3>
+      <p>Using qualitative analysis of documented high-profile cases, this review finds that profiling adds genuine investigative value when combined with traditional techniques and physical evidence, but that it remains vulnerable to subjectivity and stereotyping when used alone. The authors trace profiling's roots to early figures like Thomas Bond and the FBI's Behavioral Science Unit, and distinguish deductive, inductive, and geographic profiling as distinct methodologies with different evidentiary strength.</p>
+      <div class="tag-row"><span class="lit-tag">Criminal justice</span><span class="lit-tag">Profiling methodology</span><span class="lit-tag">Investigative psychology</span></div>
+    </div>
+
+    <div class="lit-card reveal">
+<div class="journal-label">
+    PEER-REVIEWED ARTICLE
+</div>
+      <div class="cite">Hanafy S. (2025). The Role of Forensic Psychology in Understanding Criminal Behavior and Legal Decision Making. <em>Journal of Forensic Psychology</em>, 10:388.</div>
+      <h3>An expanding, dual-system role</h3>
+      <p>This review frames forensic psychology as a critical intersection of psychology and law that has expanded well beyond profiling into competency evaluation, offender assessment, risk prediction, and policy contributions. It stresses that forensic psychologists now inform decisions across both criminal proceedings (sentencing, insanity determinations) and civil matters (custody, capacity), improving accuracy and fairness in judicial decision-making.</p>
+      <div class="tag-row"><span class="lit-tag">Civil justice</span><span class="lit-tag">Criminal justice</span><span class="lit-tag">Legal decision-making</span></div>
+    </div>
+
+    <div class="lit-card reveal">
+<div class="journal-label">
+    PEER-REVIEWED ARTICLE
+</div>
+      <div class="cite">Turner MD, Marinconz K, Shimp G. (2025). The 1984 Rajneeshee Bioterrorism Attack: An Example of Biological Warfare by Violent Non-state Actors. <em>Cureus</em>, 17(7), e88514.</div>
+      <h3>Applied source: the case itself, peer-reviewed</h3>
+      <p>This peer-reviewed case analysis situates the Rajneeshpuram attack within the broader history of biological warfare, arguing that it demonstrates how low-cost, low-technology methods let small, highly motivated non-state groups cause mass harm without specialised equipment. It corroborates the case facts used throughout this portfolio and offers a public-health-security lens to pair with the psychological one.</p>
+      <div class="tag-row"><span class="lit-tag">Applied case study</span><span class="lit-tag">Bioterrorism</span><span class="lit-tag">Non-state violence</span></div>
+    </div>
+  </section>
+
+  <!-- INTEGRATION -->
+  <section class="content" id="s08">
+    <div class="integration reveal">
+      <h2>Integration: Connecting the Case to the Research</h2>
+      <p>The Rajneeshpuram case is a useful stress-test for the literature reviewed above. Eze et al. (2025) caution that criminal profiling is not a standalone solution — and this case proves the point directly: no offender profile identified Sheela or Puja. The case was solved through epidemiological case linkage, microbiological matching, documentary evidence, and cooperating witness testimony — the "traditional investigative techniques" the review says profiling must be integrated with, not replace.</p>
+      <p>Hanafy's (2025) broader claim, that forensic psychology's role has expanded well past profiling into assessment, decision-making, and policy, also shows up in this case's aftermath — expert psychological accounts of Sheela's manipulative influence style and the commune's authoritarian structure shaped later understanding of the case, even though psychology was not part of the original investigation. That distinction matters for practice: forensic psychology's evidentiary contribution here was retrospective (explaining the offender's behaviour) rather than investigative (identifying the offender), which is a more realistic picture of the field's civil and criminal justice role than popular "profiler catches the criminal" narratives suggest.</p>
+      <p>Together, the case and the literature point to the same conclusion: forensic psychology's genuine value lies less in solving cases through profiling alone, and more in interpreting motive, authority structures, and deception once physical and testimonial evidence has already done the work of identification.</p>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section class="content">
+    <div class="section-head reveal"><span class="section-num">09</span><h2>References</h2></div>
+    <div class="section-rule reveal"></div>
+    <ul class="refs reveal" style="margin-top:20px;">
+      <li>Eze, S. M., Alabi, K. J., Ibrahim, S. O., Yusuf, A. O., Hamzat, F. O., Abdulrauf, A., Atoyebi, A. T., Lawal, I. A., Ibrahim, O. A., Imam-Fulani, A. Y., &amp; Dare, B. J. (2025). Forensic psychology and criminal profiling. <em>Journal of Forensic Science and Research, 9</em>(1), 92–96. https://doi.org/10.29328/journal.jfsr.1001085</li>
+      <li>Hanafy, S. (2025). The role of forensic psychology in understanding criminal behavior and legal decision making. <em>Journal of Forensic Psychology, 10</em>, 388. https://doi.org/10.35248/2475-319X.25.10.388</li>
+      <li>Turner, M. D., Marinconz, K., &amp; Shimp, G. (2025). The 1984 Rajneeshee bioterrorism attack: An example of biological warfare by violent non-state actors. <em>Cureus, 17</em>(7), e88514. https://doi.org/10.7759/cureus.88514</li>
+      <li>Wikipedia contributors. (2026). 1984 Rajneeshee bioterror attack. <em>Wikipedia, The Free Encyclopedia</em>. https://en.wikipedia.org/wiki/1984_Rajneeshee_bioterror_attack</li>
+          </ul>
+  </section>
+
+  <footer>
+    <div>Forensic Psychology · CIA 1 · [Ashley D'mello] · [2434517] · [BPSY302C-5] · [05-07-2026]</div>
+  </footer>
+<div class="case-stamp">
+
+CASE CLOSED
+
+<br>
+
+1986
+
+</div>
+
+</div>
+<script>
+const offenders = {
+    sheela: {
+ 	name: "Ma Anand Sheela",
+    	role: "Personal secretary to Rajneesh  Commune administrator",
+    status:"Convicted",
+    position:"Principal Planner",
+    risk:"High",
+	image:"images/sheela.jpeg",
+        traits: [
+            "Organised offender",
+            "High control need",
+            "Instrumental aggression",
+            "Manipulative influence style",
+            "Authoritarian leadership"
+        ],
+	notes:`
+        <p><strong>Offence style:</strong> Sheela's role in the attack maps closely onto what profiling literature calls the <em>organised offender</em> — methodical planning, controlled 		testing before full deployment, and a clear instrumental goal (electoral advantage) rather than impulsive or expressive violence. This distinguishes the case from 			disorganised, emotionally-driven offending.</p>
+        <p><strong>Authority and manipulation:</strong> Multiple commune members testified that Sheela selectively edited recordings of Rajneesh and framed questions to him narrowly, so 			that his general answers could later be presented as authorisation for actions he had not specifically approved. Her own husband described this as a deliberate 			technique for manufacturing consent after the fact.</p>
+        <p><strong>Command structure:</strong> Sheela operated at the centre of a tightly compartmentalised cell — roughly a dozen people were involved across planning, laboratory 			production, and dispersal, with several participants reportedly unaware of the full objective of their work. This compartmentalisation is itself a psychologically and 			forensically significant feature: it limited what any single defector could disclose.</p>
+        <p><strong>Contested attribution:</strong> A 1994 study noted that most followers believed Rajneesh had not personally directed the poisoning, seeing it instead as Sheela's 			independent initiative — an important caution against assuming a charismatic leader's authority automatically extends to operational criminal control.</p>
+		`,
+        caseNote:
+            "Ma Anand Sheela has remained a public figure through interviews, documentaries and public appearances."
+    },
+puja:{
+    name:"Ma Anand Puja",
+    role:"Nurse Practitioner  Rajneesh Medical Corporation",
+
+    status:"Convicted",
+    position:"Laboratory Specialist",
+    risk:"Moderate",
+
+    image:null,
+
+    traits:[
+        "Laboratory expertise",
+        "Scientific precision",
+        "Methodical",
+        "Operational support",
+        "Technical planning"
+    ],
+    notes:`
+<p><strong>Offence style:</strong> Puja's role reflects the technical specialist offender profile someone whose participation was defined by scientific competence rather than dominance or ideological conviction. Unlike Sheela's organised, control-driven pattern, Puja's offending was function-specific: she was recruited and deployed for what she could produce, not for her capacity to direct others.</p>
+<p><strong>Authority and manipulation:</strong> Testimony from the case suggests Puja operated under Sheela's direction rather than exercising independent authority. Her position within the commune hierarchy was subordinate, and several accounts describe her as deferential to Sheela's instructions rather than someone who manipulated others to secure compliance.</p>
+<p><strong>Command structure:</strong> Puja sat at the technical node of the compartmentalised cell responsible for the laboratory cultivation of Salmonella typhimurium used in the attack. Her specialised knowledge made her indispensable to the operation's execution, but she was not positioned at its planning or decision-making centre, illustrating how compartmentalised offending structures distribute risk and knowledge unevenly across participants.</p>
+<p><strong>Contested attribution:</strong> Accounts diverge on how much latitude Puja had. Some framings present her as a fully willing technical collaborator; others suggest she acted under considerable pressure within a hierarchical, closed system where dissent carried personal risk an important caution against treating all participants in a group offence as equally culpable or equally autonomous.</p>
+`,
+    caseNote:"Following her release from prison, Ma Anand Puja withdrew from public life. There are no widely available verified public photographs of her after the Rajneeshee case."
+}
+};
+
+// ---------- PROGRESS BAR ----------
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = h.scrollTop;
+  const height = h.scrollHeight - h.clientHeight;
+  document.getElementById('progress-bar').style.width = (height>0 ? (scrolled/height*100) : 0) + '%';
+}
+
+// ---------- PARALLAX ----------
+function updateParallax(){
+  const y = window.scrollY;
+  document.querySelectorAll('.parallax-layer').forEach(el=>{
+    const speed = parseFloat(el.getAttribute('data-speed'));
+    el.style.transform = `translateY(${y*speed}px)`;
+  });
+}
+
+let ticking=false;
+window.addEventListener('scroll', ()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{ updateProgress(); updateParallax(); ticking=false; });
+    ticking=true;
+  }
+}, {passive:true});
+updateProgress(); updateParallax();
+
+// ---------- SIDE NAV ACTIVE STATE ----------
+const navLinks = document.querySelectorAll('#side-nav a');
+const navMap = {};
+navLinks.forEach(a=>{ navMap[a.dataset.target]=a; });
+const navObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(a=>a.classList.remove('active'));
+      const link = navMap[entry.target.id];
+      if(link) link.classList.add('active');
+    }
+  });
+},{rootMargin:'-45% 0px -45% 0px'});
+document.querySelectorAll('section.content[id]').forEach(s=>navObserver.observe(s));
+
+// ---------- REVEAL ON SCROLL ----------
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el=>revealObserver.observe(el));
+
+// timeline items + spine
+const timelineEl = document.querySelector('.timeline');
+const tlObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      tlObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.tl-item').forEach(el=>tlObserver.observe(el));
+const spineObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{ if(entry.isIntersecting){ timelineEl.classList.add('in'); spineObserver.unobserve(entry.target);} });
+},{threshold:0.05});
+if(timelineEl) spineObserver.observe(timelineEl);
+
+// profile trait chips + count animation trigger
+const profileCard = document.querySelector('.profile-card');
+const profileObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{ if(entry.isIntersecting){ profileCard.classList.add('in'); profileObserver.unobserve(entry.target);} });
+},{threshold:0.3});
+if(profileCard) profileObserver.observe(profileCard);
+
+// ---------- COUNT-UP NUMBERS ----------
+function animateCount(el, target, duration){
+  const start = performance.now();
+  function step(now){
+    const p = Math.min((now-start)/duration, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(eased*target);
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const countEls = document.querySelectorAll('[data-count]');
+const countObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-count'),10);
+      animateCount(el, target, 1400);
+      countObserver.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+countEls.forEach(el=>countObserver.observe(el));
+
+// ---------- VERSUS INTERACTIVE ----------
+function toggleVersus(side){
+  const block = document.getElementById('versus-block');
+  const currentlyDim = block.classList.contains('dim-'+side);
+  block.classList.remove('dim-no','dim-yes');
+  if(!currentlyDim){
+    block.classList.add(side==='no' ? 'dim-yes' : 'dim-no');
+  }
+}
+const versusObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      document.querySelectorAll('.v-col').forEach(c=>c.classList.add('in'));
+      versusObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:0.3});
+const versusBlock = document.getElementById('versus-block');
+if(versusBlock) versusObserver.observe(versusBlock);
+
+// ---------- LIGHTBOX ----------
+function openLightbox(which){
+    const lb = document.getElementById('lightbox');
+    const content = document.getElementById('lightbox-content');
+    lb.classList.add('open');
+}
+document.getElementById('lightbox').addEventListener('click', ()=>{
+  document.getElementById('lightbox').classList.remove('open');
+});
+function loadProfile(person){
+document.getElementById("current-profile").innerHTML =
+    "SUBJECT PROFILE<br><strong>" + person.name + "</strong>";
+    document.getElementById("profile-name").textContent =
+        person.name;
+    document.getElementById("profile-role").textContent =
+        person.role;
+document.getElementById("profile-status").textContent =
+    person.status;
+document.getElementById("profile-position").textContent =
+    person.position;
+document.getElementById("profile-risk").textContent =
+    person.risk;
+const photo = document.getElementById("profile-photo");
+const silhouette = document.getElementById("profile-silhouette");
+
+if(person.image){
+
+    photo.style.display = "block";
+    silhouette.style.display = "none";
+    photo.src = person.image;
+
+}else{
+
+    photo.style.display = "none";
+    silhouette.style.display = "block";
+
+}
+
+const traitBox = document.getElementById("trait-list");
+traitBox.innerHTML = "";
+person.traits.forEach(function(trait){
+    const chip = document.createElement("span");
+    chip.className = "trait";
+    chip.textContent = trait;
+    traitBox.appendChild(chip);
+});
+document.getElementById("profile-notes").innerHTML =
+    person.notes +
+    `
+    <div id="case-note" class="factbox">
+        <h3>Case Note</h3>
+        <p id="case-note-text">
+            ${person.caseNote}
+        </p>
+    </div>
+    `;
+}
+
+const sheelaBtn = document.getElementById("show-sheela");
+const pujaBtn = document.getElementById("show-puja");
+
+function setActiveButton(button){
+
+    sheelaBtn.classList.remove("active");
+    pujaBtn.classList.remove("active");
+
+    button.classList.add("active");
+
+}
+
+sheelaBtn.addEventListener("click", function(){
+
+    loadProfile(offenders.sheela);
+
+    setActiveButton(sheelaBtn);
+
+});
+
+pujaBtn.addEventListener("click", function(){
+
+    loadProfile(offenders.puja);
+
+    setActiveButton(pujaBtn);
+
+});
+
+loadProfile(offenders.sheela);
+setActiveButton(sheelaBtn);
+
+</script>
+</body>
+</html>
